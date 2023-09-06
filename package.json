@@ -1,0 +1,14 @@
+{
+    "name": "altair-8800-presentations",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "reveal-md pages/ -w",
+        "build": "reveal-md pages/ --static build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "NateLevin1",
+    "license": "MIT",
+    "dependencies": {
+        "reveal-md": "^5.5.1"
+    }
+}
