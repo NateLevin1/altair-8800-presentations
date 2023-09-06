@@ -13,6 +13,7 @@ This is the first slide.
 ## Second slide
 
 This is the second slide. Here is an image:
+
 ![Image](https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg?20070224000419)
 
 ---
