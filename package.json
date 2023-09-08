@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "start": "reveal-md pages/ -w",
-        "build": "reveal-md pages/ --static build",
+        "build": "rm -rf build && reveal-md pages/ --static build && mkdir -p build/static && cp static/* build/static",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "NateLevin1",
