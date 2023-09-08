@@ -6,5 +6,5 @@ Take a look at [reveal-md](https://github.com/webpro/reveal-md#readme) for more 
 
 The slideshows are deployed on Cloudflare Pages: https://altair-8800-presentations.pages.dev/
 
-To preview the slides, go to your terminal and run `npm run dev`.
+To preview the slides, go to your terminal and run `npm start`.
 **You will need to install NPM for this command to work.** You can find more info on how to install NPM [here](https://nodejs.dev/en/learn/how-to-install-nodejs/).
