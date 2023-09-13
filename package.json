@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "scripts": {
         "start": "reveal-md pages/ -w",
-        "build": "rm -rf build && reveal-md pages/ --static build && mkdir -p build/static && cp static/* build/static",
+        "build": "rm -rf build && reveal-md pages/ --static build && mkdir -p build/static && cp static/* build/static && npm run build-instr-search && cp -r instr-search/ build/instr-search/",
+        "build-instr-search": "node instr-search/build-documentation.mjs",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "NateLevin1",

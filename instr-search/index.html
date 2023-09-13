@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: auto; scrollbar-gutter: stable;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altair 8800 Instruction Search</title>
+    <script src="flexsearch.bundle.js" defer></script>
+    <script src="main.js" type="module" defer></script>
+    <!-- We shouldn't use the Tailwind CDN, but it works for now. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex p-4 justify-center">
+    <div class="max-w-2xl flex gap-2 flex-col p-4">
+        <h1 class="text-4xl font-bold">Altair 8800 Instruction Search</h1>
+        <p class="my-2">Instruction documentation is from <a href="https://ubuntourist.codeberg.page/#" target="_blank"
+                class="underline text-blue-700">Kevin Cole's</a>
+            transcription of the Altair 8800 documentation.</p>
+        <input type="search" id="search" placeholder="Search..." class="text-xl border p-2 max-w-xl">
+        <div id="results" class="my-2"></div>
+    </div>
+</body>
+
+</html>
