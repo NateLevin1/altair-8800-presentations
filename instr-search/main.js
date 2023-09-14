@@ -62,9 +62,10 @@ function updateResults(searchResults) {
 
         let argsHtml = "";
         for (const { binary, position } of instr.args) {
+            const isBinaryValid = /^(?:0|1| )+$/.test(binary);
             const binaryNum = parseInt(binary.replace(/ /g, ""), 2);
             let hex;
-            if (!isNaN(binaryNum)) {
+            if (isBinaryValid) {
                 hex = binaryNum.toString(16).toUpperCase().padStart(2, "0");
             }
             argsHtml += `
