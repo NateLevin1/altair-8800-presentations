@@ -77,7 +77,7 @@ function updateResults(searchResults) {
                     ? `<span class="font-mono bg-neutral-200 rounded p-0.5 px-1.5 select-all">${rstToHtml(
                           hex
                       )}</span>`
-                    : ""
+                    : "<div></div>"
             }
             `;
         }
