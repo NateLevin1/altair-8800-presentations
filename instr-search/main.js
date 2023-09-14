@@ -62,11 +62,23 @@ function updateResults(searchResults) {
 
         let argsHtml = "";
         for (const { binary, position } of instr.args) {
+            const binaryNum = parseInt(binary.replace(/ /g, ""), 2);
+            let hex;
+            if (!isNaN(binaryNum)) {
+                hex = binaryNum.toString(16).toUpperCase().padStart(2, "0");
+            }
             argsHtml += `
-                <span class="font-mono bg-neutral-200 rounded p-0.5 px-1.5 select-all">${rstToHtml(
-                    binary
-                )}</span>
-                <span class="">${position}</span>
+            <span class="">${position}: </span>
+            <span class="font-mono bg-neutral-200 rounded p-0.5 px-1.5 select-all">${rstToHtml(
+                binary
+            )}</span>
+            ${
+                hex
+                    ? `<span class="font-mono bg-neutral-200 rounded p-0.5 px-1.5 select-all">${rstToHtml(
+                          hex
+                      )}</span>`
+                    : ""
+            }
             `;
         }
 
@@ -76,7 +88,7 @@ function updateResults(searchResults) {
             }<span class="instruction font-normal font-sans"> — ${rstToHtml(
             instr.instruction
         )}</span></h2>
-            <div class="grid grid-cols-[max-content_minmax(0,1fr)] gap-2 text-[0.9em]">
+            <div class="grid grid-cols-[max-content_max-content_max-content] gap-3 text-[0.9em]">
                 ${argsHtml}
             </div>
             <div class="operation">${rstToHtml(instr.operation)}</div>

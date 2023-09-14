@@ -56,7 +56,7 @@ for (var i = 0; i < lines.length; i++) {
             if (argMatch) {
                 let [_match, binary, position] = argMatch;
                 binary = binary.trim();
-                position = position.trim();
+                position = position.trim().slice(1, -1);
                 args.push({ binary, position });
             }
             i++;
