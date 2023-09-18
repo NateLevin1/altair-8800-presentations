@@ -9,7 +9,9 @@ const instrToSearchString = (instr) => {
         " " +
         instr.operation +
         " " +
-        (instr.example ?? "")
+        (instr.example ?? "") +
+        " " +
+        instr.usages.map((usage) => usage.hex).join(" ")
     );
 };
 
@@ -83,6 +85,24 @@ function updateResults(searchResults) {
             `;
         }
 
+        let usagesHtml = "";
+        if (instr.usages.length > 1) {
+            for (const { instr: instrUsage, hex } of instr.usages) {
+                if (hex) {
+                    if (!usagesHtml) {
+                        usagesHtml += `<div class="font-bold">Usages:</div>`;
+                    }
+                    usagesHtml += `
+                    <div>
+                        <span class="font-mono">${instrUsage}</span>
+                        <span>=</span>
+                        <span class="font-mono bg-neutral-200 rounded p-0.5 px-1.5 select-all">${hex}</span>
+                    </div>
+                    `;
+                }
+            }
+        }
+
         instrElement.innerHTML = `
             <h2 class="mnemonic font-bold font-mono text-xl border-b">${
                 instr.mnemonic
@@ -94,6 +114,7 @@ function updateResults(searchResults) {
             </div>
             <div class="operation">${rstToHtml(instr.operation)}</div>
             ${exampleHtml}
+            ${usagesHtml}
         `;
         results.appendChild(instrElement);
     }

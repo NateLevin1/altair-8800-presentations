@@ -7,9 +7,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const docsUrl =
     "https://codeberg.org/ubuntourist/Altair8800/raw/branch/main/source/part-4.rst";
-console.log("Fetching docs...");
-async function fetchDocs() {
-    const docs = await fetch(docsUrl, {
+
+const appendixUrl =
+    "https://codeberg.org/ubuntourist/Altair8800/raw/branch/main/source/appendix.rst";
+
+async function fetchDocs(url) {
+    console.log("Fetching docs...");
+    const docs = await fetch(url, {
         userAgent:
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Safari/605.1.15",
     }).then((txt) => txt.text());
@@ -19,7 +23,8 @@ async function fetchDocs() {
     }
     return docs;
 }
-const txtDocumentation = await fetchDocs();
+const txtDocumentation = await fetchDocs(docsUrl);
+const txtAppendix = await fetchDocs(appendixUrl);
 
 console.log("Loaded docs from " + docsUrl);
 
@@ -32,6 +37,7 @@ const operationRegex = /\| (\*\*Operation\*\*: )/;
 const statusBitsRegex = /\| (\*\*Status Bits(?: Affected)?\*\*: )/;
 const exampleRegex = /\| (\*\*Example\*\*: )/;
 const textRegex = /\|([^|]+)\|/;
+const instrHexCodeRegex = /^ +\|[^`*\n]+([`*])(.+?)\1.+\|(.+)\|/gm;
 
 const result = [];
 for (var i = 0; i < lines.length; i++) {
@@ -91,6 +97,23 @@ for (var i = 0; i < lines.length; i++) {
             example,
         });
     }
+}
+
+for (const [
+    _match,
+    _separator,
+    fullInstrSource,
+    dirtyHex,
+] of txtAppendix.matchAll(instrHexCodeRegex)) {
+    const hex = dirtyHex.replace(/`|\*/g, "").trim();
+    const mnemonic = fullInstrSource.split(" ")[0];
+    const instr = result.find((instr) => instr.mnemonic === mnemonic);
+    if (!instr) {
+        console.warn("Could not find instruction " + mnemonic);
+        continue;
+    }
+    if (!instr.usages) instr.usages = [];
+    instr.usages.push({ instr: fullInstrSource, hex });
 }
 
 const instrCount = result.length;
